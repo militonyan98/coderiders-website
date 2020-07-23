@@ -16,7 +16,7 @@ class AdminBlogController extends Controller
 
     public function create(Request $request){
         $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg|max:2MB',
+            'image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
         
         if($request->id!=null){

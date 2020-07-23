@@ -62,4 +62,22 @@ class ReviewController extends Controller
 
         return redirect('reviews');
     }
+
+    public function addToCarousel($id){
+        $review = Review::findOrFail($id);
+        $review->carousel_status = 1;
+
+        $review->save();
+
+        return redirect('reviews');
+    }
+
+    public function removeFromCarousel($id){
+        $review = Review::findOrFail($id);
+        $review->carousel_status = 0;
+
+        $review->save();
+
+        return redirect('reviews');
+    }
 }

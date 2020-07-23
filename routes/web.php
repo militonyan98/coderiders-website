@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/login', function () {
+    abort(404);
+});
+Route::get('/admin', function(){return view('auth.login');})->name('admin');
 Auth::routes();
+// Auth::routes(['register' => false]);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    // Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/blog-creation', 'Admin\AdminBlogController@createIndex');
 
@@ -53,5 +58,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit-review/{id}', 'Admin\ReviewController@edit')->name('edit-review');
 
     Route::get('/delete-review/{id}', 'Admin\ReviewController@delete')->name('delete-review');
+
+    Route::get('/add-to-carousel/{id}', 'Admin\ReviewController@addToCarousel')->name('add-to-carousel');
+
+    Route::get('/remove-from-carousel/{id}', 'Admin\ReviewController@removeFromCarousel')->name('remove-from-carousel');
+
 });
 
+
+Route::get('/blog', 'BlogController@index');
+
+Route::get('/blog/{slug}', 'BlogController@show')->name('blog-inner');

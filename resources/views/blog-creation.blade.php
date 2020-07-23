@@ -33,11 +33,11 @@
                         <input type="file" id="image" name="image" value="{{$blog->image}}">
                         <input type="text" id="imageTitle" name="imageTitle" value="{{$blog->image_title}}">
                         <input type="text" id="imageAlt" name="imageAlt" value="{{$blog->image_alt}}">
-                        <input type="checkbox" id="publish" name="publish" value="publish" <?=$blog->publish_status==1?'checked':''?>>
+                        <input type="checkbox" id="publish" name="publish" <?=$blog->publish_status==1?'checked':''?>>
                         <label for="publish">Published</label>
-                        <input type="checkbox" id="trending" name="trending" value="trending" <?=$blog->trending_status==1?'checked':''?>>
+                        <input type="checkbox" id="trending" name="trending" <?=$blog->trending_status==1?'checked':''?>>
                         <label for="trending">Trending</label>
-                        <input type="checkbox" id="main" name="main" value="main" <?=$blog->main_status==1?'checked':''?>>
+                        <input type="checkbox" id="main" name="main" <?=$blog->main_status==1?'checked':''?>>
                         <label for="main">Main</label>
 
                         <input type="submit" value="<?=$blog->id>0?'Update':'Create'?>" name="Submit" class="btn btn-success">

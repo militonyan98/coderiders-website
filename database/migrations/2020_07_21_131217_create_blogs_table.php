@@ -19,10 +19,10 @@ class CreateBlogsTable extends Migration
             $table->string('page_description');
             $table->string('banner_title');
             $table->string('banner_text');
-            $table->string('banner_slug');
+            $table->string('banner_slug')->unique();
             $table->string('banner_slug_text');
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('content');
             $table->boolean('publish_status')->default(0);
             $table->boolean('trending_status')->default(0);
