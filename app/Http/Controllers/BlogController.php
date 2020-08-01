@@ -8,13 +8,11 @@ use App\Blog as BlogModel;
 class BlogController extends Controller
 {
     public function index(){
-        $blog = new BlogModel;
-
         $pageTitle = 'Custom Software Development Company Blog | CodeRiders';
         $pageMetaDescription = 'The latest research-driven software development articles and news on web development and design, custom software development, software outsource, etc.';
-        $mainBlog = $blog->getMainBlog();
-        $recentBlogs = $blog->getRecentBlogs();
-        $trendingBlogs = $blog->getTrendingBlogs();
+        $mainBlog = BlogModel::getMainBlog();
+        $recentBlogs = BlogModel::getRecentBlogs();
+        $trendingBlogs = BlogModel::getTrendingBlogs();
 
         return view('Blog',['page_title'=>$pageTitle, 
                             'page_description'=>$pageMetaDescription, 
@@ -24,16 +22,14 @@ class BlogController extends Controller
     }
 
     public function show($slug){
-        $blog = new BlogModel;
-
-        $target_blog = $blog->findBySlug($slug);
+        $target_blog = BlogModel::findBySlug($slug);
         if(empty($target_blog)){
             abort(404);
         }
 
         $target_blog = $target_blog[0];
 
-        $trending_blogs = $blog->getTrendingBlogs($target_blog['id']);
+        $trending_blogs = BlogModel::getTrendingBlogs($target_blog['id']);
         // $related_blogs  = $blog->findRelatedBlogs($target_blog['id']);
 
         return view('BlogInner', ['target_blog' => $target_blog, 'trending_blogs' => $trending_blogs]);
@@ -51,10 +47,8 @@ class BlogController extends Controller
         $current_offset = $request->offset;
         $next_offset = $current_offset + 2;
 
-        $blog = new BlogModel;
-
-        $all_blogs_count = $blog->getAllBlogsCount(true);
-        $recent_blogs = $blog->getRecentBlogs(2, $current_offset);
+        $all_blogs_count = BlogModel::getAllBlogsCount(true);
+        $recent_blogs = BlogModel::getRecentBlogs(2, $current_offset);
 
         if($next_offset >= $all_blogs_count) {
             $has_next_page = false;

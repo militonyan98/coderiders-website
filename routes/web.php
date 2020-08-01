@@ -21,8 +21,8 @@ Route::get('/login', function () {
     abort(404);
 });
 Route::get('/admin', function(){return view('auth.login');})->name('admin');
-Auth::routes();
-// Auth::routes(['register' => false]);
+// Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::middleware('auth')->group(function () {
     // Route::get('/home', 'HomeController@index')->name('home');
@@ -63,9 +63,85 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/remove-from-carousel/{id}', 'Admin\ReviewController@removeFromCarousel')->name('remove-from-carousel');
 
+    Route::get('/carousel', 'Admin\PageController@carousel')->name('carousel');
+
 });
 
 
 Route::get('/blog', 'BlogController@index');
 
 Route::get('/blog/{slug}', 'BlogController@show')->name('blog-inner');
+
+Route::get('/portfolio', function () {
+    return view('Portfolio');
+});
+
+Route::get('/company', 'CompanyController@index')->name('company');
+
+Route::get('/about-us', function () {
+    return view('AboutUs');
+});
+
+Route::get('/api-integration', function () {
+    return view('API_Integration');
+});
+
+Route::get('/business-intelligence', function () {
+    return view('BI');
+});
+
+Route::get('/big-data', function () {
+    return view('BigData');
+});
+
+Route::get('/consulting', function () {
+    return view('Consulting');
+});
+
+Route::get('/customer-relationship-management', function () {
+    return view('CRM');
+});
+
+Route::get('/custom-development', 'CustomDevelopmentController@index')->name('custom-development');
+
+Route::get('e-commerce', function () {
+    return view('E_Commerce');
+});
+
+Route::get('/industries', function () {
+    return view('Industries');
+});
+
+Route::get('/mobile-development', function () {
+    return view('MobileDevelopment');
+});
+
+Route::get('/privacy-policy', function () {
+    return view('PrivacyPolicy');
+});
+
+Route::get('/processes', function () {
+    return view('Processes');
+});
+
+Route::get('/real-time-solutions', function () {
+    return view('RealTimeSolutions');
+});
+
+Route::get('/services', function () {
+    return view('Services');
+});
+
+Route::get('/solutions', function () {
+    return view('Solutions');
+});
+
+Route::get('/web-development', function () {
+    return view('WebDevelopment');
+});
+
+Route::get('/contact-us', 'ContactUsController@index')->name('contact-us');
+
+Route::post('/contact-us', 'ContactUsController@send')->name('contact-us-send');
+
+Route::post('/subscribe', 'ContactUsController@subscribe')->name('contact-us-subscribe');
